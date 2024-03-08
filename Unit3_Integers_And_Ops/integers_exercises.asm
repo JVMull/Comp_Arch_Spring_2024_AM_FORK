@@ -23,35 +23,30 @@ asm_main:
         enter   0,0               ; setup routine
         pusha
 
-        ; showcasing negative numbers
-        mov eax, -34
+        ; mov eax, -34
+        ; dump_regs 1
+
+        mov eax, 0
+        mov al, 0DEH ;Moves -34 into eax
+
+        call print_int
+        call print_nl
+
+        mov eax, 0FFFFFFFFH ;0 at beginning and H at ending means hex
+        MOV AL, 0DEH
+
+        call print_int
+        call print_nl
+
+        mov eax, -1
+        mov ax, 58
+
         dump_regs 1
         call print_nl
 
-        ; trying to sign extend a negative number incorrectly
-        mov eax, 0
-        mov al, 0DEH ; -34 into eax
-
-        call print_int
-        call print_nl
-
-        ; sign extending a negative number correctly
-        ; extend with 1s to the left
-        mov eax, 0FFFFFFFFH
-        mov al, 0DEH
-
-        call print_int
-        call print_nl
-        call print_nl
-
-        ; showing extending into a register with movzx
-        mov eax, -1
-        mov ax, 58
-        dump_regs 2
-        call print_nl
-
         movzx eax, ax
-        dump_regs 3
+        dump_regs 2
+		; TODO: add code
 
         popa
         mov     eax, 0            ; return back to C
